@@ -1,6 +1,4 @@
-turbo-stream action="replace" targets="#create_checklist"
-  template
-    == render Home::CreateChecklistComponent.new
-li.flex
-  a.flex-auto href=checklist_path(@checklist) data-turbo-frame="current_checklist" = @checklist.title
-  span.flex-initial = rand(1..2) == 1 ? '+' : '-'
+turbo-frame id="sidebar_#{dom_id(@checklist)}"
+  li.flex id="sidebar_#{dom_id(@checklist)}"
+    a.flex-auto href=checklist_path(@checklist) data-turbo-frame="current_checklist" = @checklist.title
+    span.flex-initial = rand(1..2) == 1 ? '+' : '-'

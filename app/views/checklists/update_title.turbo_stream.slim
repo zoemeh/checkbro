@@ -1,0 +1,4 @@
+= turbo_stream.replace(:checklist_title,
+        render(Checklist::TitleComponent.new(checklist: @checklist)))
+= turbo_stream.replace("sidebar_#{dom_id(@checklist)}",
+        render(Sidebar::ChecklistComponent.new(checklist: @checklist)))

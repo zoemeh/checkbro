@@ -1,0 +1,4 @@
+turbo-frame#sidebar_checklists
+  ul
+    - @checklists.each do |checklist|
+      = render Sidebar::ChecklistComponent.new(checklist: checklist)

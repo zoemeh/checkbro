@@ -1,0 +1,3 @@
+= turbo_stream.append(:sidebar_checklists,
+        render(Sidebar::ChecklistComponent.new(checklist: @checklist)))
+= turbo_stream.replace(:create_checklist, render(Home::CreateChecklistComponent.new))

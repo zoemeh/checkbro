@@ -6,5 +6,5 @@ turbo-frame#current_checklist.bg-blue-100.p-2
         - @checklist.items.each do |item|
           == render Checklist::ItemComponent.new(checklist_item: item)
       .flex-auto.flex.justify-center.gap-4
-        a.text-blue-600.border-2.border-gray-700.px-2.py-1 href=checklist_add_item_url(@checklist) data-turbo-method="post" Add Process
+        a.text-blue-600.border-2.border-gray-700.px-2.py-1 href=checklist_add_item_path(@checklist) data-turbo-method="post" Add Process
         button.text-blue-600.border-2.border-gray-700.px-2.py-1 type="submit" Save

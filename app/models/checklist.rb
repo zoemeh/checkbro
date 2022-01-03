@@ -3,7 +3,6 @@ class Checklist < ApplicationRecord
   has_many :checklist_items, dependent: :delete_all
   accepts_nested_attributes_for :checklist_items, :allow_destroy => true
 
-
   def items
     checklist_items
   end

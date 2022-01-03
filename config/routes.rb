@@ -4,6 +4,7 @@ Rails.application.routes.draw do
     post "add_item", to: "checklists#add_item"
     get "edit_title", to: "checklists#edit_title"
     patch "edit_title", to: "checklists#update_title"
+
   end
   root to: "pages#home"
 
