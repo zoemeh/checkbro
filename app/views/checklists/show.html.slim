@@ -1,17 +1,6 @@
 p#notice = notice
 
-turbo-frame#current_checklist.bg-blue-100.p-2
-  .flex.border-4.border-gray-700.mb-4.px-2.items-center
-    h1.text-lg.flex-auto = @checklist.title
-    a.flex-initial.text-blue-600 href="#" Lock
-  form method="put" action=checklist_path(@checklist)
-    .flex.flex-col.gap-2
-      #checklist_items.flex.flex-col.gap-2
-        - @checklist.items.each do |item|
-          == render Checklist::ItemComponent.new(checklist_item: item)
-      .flex-auto.flex.justify-center.gap-4
-        a.text-blue-600.border-2.border-gray-700.px-2.py-1 href=checklist_add_item_url(@checklist) data-turbo-method="post" Add Process
-        button.text-blue-600.border-2.border-gray-700.px-2.py-1 type="submit" Save
+== render Checklist::ShowComponent.new checklist: @checklist
 => link_to 'Edit', edit_checklist_path(@checklist)
 '|
 =< link_to 'Back', checklists_path

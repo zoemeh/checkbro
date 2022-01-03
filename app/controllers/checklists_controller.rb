@@ -1,5 +1,5 @@
 class ChecklistsController < ApplicationController
-  before_action :set_checklist, only: %i[ show edit update destroy ]
+  before_action :set_checklist, only: %i[ show edit update destroy]
 
   # GET /checklists or /checklists.json
   def index
@@ -49,6 +49,30 @@ class ChecklistsController < ApplicationController
     end
   end
 
+  def edit_title
+    @checklist = Checklist.find(params[:checklist_id])
+    respond_to do |format|
+      format.html {}
+      format.turbo_stream do
+        rendered_component = Checklist::EditTitleComponent.new(checklist: @checklist).render_in(view_context)
+        render turbo_stream: turbo_stream.replace(:checklist_title, rendered_component)
+      end
+    end
+  end
+
+  def update_title
+    @checklist = Checklist.find(params[:checklist_id])
+    respond_to do |format|
+      if @checklist.update(checklist_params)
+        format.turbo_stream do
+          rendered_component = Checklist::TitleComponent.new(checklist: @checklist).render_in(view_context)
+          render turbo_stream: turbo_stream.replace(:checklist_title, rendered_component)
+        end
+      else
+
+      end
+    end
+  end
   # PATCH/PUT /checklists/1 or /checklists/1.json
   def update
     respond_to do |format|

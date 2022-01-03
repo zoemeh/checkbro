@@ -25,7 +25,7 @@ ActiveRecord::Schema.define(version: 2022_01_03_051211) do
   end
 
   create_table "checklists", force: :cascade do |t|
-    t.text "title"
+    t.string "title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
   end

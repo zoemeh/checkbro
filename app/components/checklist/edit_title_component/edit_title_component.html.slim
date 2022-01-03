@@ -1,0 +1,12 @@
+turbo-frame#checklist_title
+  = simple_form_for @checklist, url: checklist_edit_title_path(@checklist), html: {id: "checklist_form"} do |f|
+    = f.error_notification
+    = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+    .flex.flex-col.gap-2
+      = f.label :title, class: "flex-initial"
+      = f.input :title, label: false, class: "flex-auto",
+              wrapper_html: {class: "flex flex-col break-normal"},
+              error_html: {class: "flex-auto text-red-500"}
+    .flex
+      = f.button :submit, class: "px-2 py-4 border-2 flex-auto"

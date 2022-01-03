@@ -1,8 +1,7 @@
 .grid.grid-cols-4.gap-2.h-full.w-full.mt-4
   div.bg-gray-10
     h1.text-lg Checklists
-    a.text-blue-600 href=new_checklist_path data-turbo-frame="create_checklist" Create
-    turbo-frame id="create_checklist"
+    == render Home::CreateChecklistComponent.new
     ul#list_checklist
       - @checklists.each do |checklist|
         == render Sidebar::ChecklistComponent.new(checklist: checklist)
