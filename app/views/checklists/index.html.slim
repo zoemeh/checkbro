@@ -1,0 +1,21 @@
+h1.text-lg.font-bold Listing checklists
+
+table.table-auto
+  thead.border-b
+    tr
+      th.px-6.py-4 Title
+      th.px-6.py-4
+      th.px-6.py-4
+      th.px-6.py-4
+
+  tbody
+    - @checklists.each do |checklist|
+      tr.border-b
+        td.px-6.py-4 = checklist.title
+        td.px-6.py-4 = link_to 'Show', checklist
+        td.px-6.py-4 = link_to 'Edit', edit_checklist_path(checklist)
+        td.px-6.py-4 = button_to 'Destroy', checklist, data: { confirm: 'Are you sure?' }, method: :delete
+
+br
+
+= link_to 'New Checklist', new_checklist_path
