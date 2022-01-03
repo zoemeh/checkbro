@@ -1,4 +1,6 @@
 turbo-frame#sidebar_checklists
+  turbo-frame id="create_checklist"
+    a.text-blue-600 href=sidebar_checklist_new_path data-turbo-frame="create_checklist" Create
   ul
     - @checklists.each do |checklist|
       = render Sidebar::ChecklistComponent.new(checklist: checklist)

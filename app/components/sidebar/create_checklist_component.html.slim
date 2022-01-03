@@ -1,0 +1,13 @@
+turbo-frame id="create_checklist"
+  = simple_form_for @checklist, url: sidebar_checklist_new_path, html: {"data-turbo-frame": "create_checklist_sidebar", id: "checklist_sidebar_form"} do |f|
+    = f.error_notification
+    = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
+
+    .flex.flex-col.gap-2
+      = f.label :title, class: "flex-initial"
+      = f.input :title, label: false, class: "flex-auto",
+              wrapper_html: {class: "flex flex-col break-normal"},
+              error_html: {class: "flex-auto text-red-500"}
+    .flex.gap-2
+      = f.button :submit, class: "px-2 py-2 border-2 flex-auto"
+      a.flex-auto.px-2.py-2.border-2 href=sidebar_path Close

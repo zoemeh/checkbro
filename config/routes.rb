@@ -1,12 +1,16 @@
 Rails.application.routes.draw do
+  get 'home/index'
   resources :checklist_items
   resources :checklists do
     post "add_item", to: "checklists#add_item"
     get "edit_title", to: "checklists#edit_title"
     patch "edit_title", to: "checklists#update_title"
-
   end
-  root to: "pages#home"
+  root to: "home#index"
+
+  get "/sidebar", to: "home#sidebar"
+  get "/sidebar/checklist/new", to: "home#sidebar_new_checklist"
+  post "/sidebar/checklist/new", to: "home#sidebar_create_checklist"
 
   scope controller: :pages do
     get :up

@@ -45,23 +45,29 @@ class ChecklistsController < ApplicationController
       end
     end
   end
-  # GET /
+
+  # GET /checklists/:checklist_id/edit_title
   def edit_title
     @checklist = Checklist.find(params[:checklist_id])
     respond_to do |format|
-      format.html {}
-      format.turbo_stream do
-        rendered_component = Checklist::EditTitleComponent.new(checklist: @checklist).render_in(view_context)
-        render turbo_stream: turbo_stream.update(:checklist_title, rendered_component)
-      end
+      format.html { render Checklist::EditTitleComponent.new checklist: @checklist}
     end
   end
 
+  # PATCH /checklists/:checklist_id/edit_title
   def update_title
     @checklist = Checklist.find(params[:checklist_id])
     respond_to do |format|
       if @checklist.update(checklist_params)
-        format.turbo_stream { render layout: false }
+        format.turbo_stream {
+          streams = [
+            turbo_stream.replace(:checklist_title,
+                                 Checklist::TitleComponent.new(checklist: @checklist).render_in(view_context)),
+            turbo_stream.replace(:sidebar_checklists,
+                                 Sidebar::SidebarComponent.new(checklists: Checklist.order(:id)).render_in(view_context))
+          ]
+          render turbo_stream: streams
+        }
       else
 
       end
@@ -73,6 +79,9 @@ class ChecklistsController < ApplicationController
     respond_to do |format|
       if @checklist.update(checklist_params)
         format.html { redirect_to checklist_url(@checklist), notice: "Checklist was successfully updated." }
+        format.turbo_stream do
+          render turbo_stream: []
+        end
         format.json { render :show, status: :ok, location: @checklist }
       else
         format.html { render :edit, status: :unprocessable_entity }
