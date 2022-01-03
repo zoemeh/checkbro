@@ -1,5 +1,6 @@
 class PagesController < ApplicationController
   def home
+    @checklists = Checklist.all
   end
 
   def up

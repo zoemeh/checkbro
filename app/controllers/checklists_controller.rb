@@ -27,9 +27,24 @@ class ChecklistsController < ApplicationController
       if @checklist.save
         format.html { redirect_to checklist_url(@checklist), notice: "Checklist was successfully created." }
         format.json { render :show, status: :created, location: @checklist }
+        format.turbo_stream do
+          rendered_compontent = Sidebar::ChecklistComponent.new(checklist: @checklist).render_in(view_context)
+          render turbo_stream: turbo_stream.append(:list_checklist, rendered_compontent)
+        end
       else
         format.html { render :new, status: :unprocessable_entity }
         format.json { render json: @checklist.errors, status: :unprocessable_entity }
+      end
+    end
+  end
+
+  def add_item
+    @checklist = Checklist.find(params[:checklist_id])
+    respond_to do |format|
+      item = ChecklistItem.create(description: "", checklist: @checklist)
+      format.turbo_stream do
+        rendered_compontent = Checklist::ItemComponent.new(checklist_item: item).render_in(view_context)
+        render turbo_stream: turbo_stream.append(:checklist_items, rendered_compontent)
       end
     end
   end
@@ -40,6 +55,9 @@ class ChecklistsController < ApplicationController
       if @checklist.update(checklist_params)
         format.html { redirect_to checklist_url(@checklist), notice: "Checklist was successfully updated." }
         format.json { render :show, status: :ok, location: @checklist }
+        format.turbo_stream do
+          render plain: "what"
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
         format.json { render json: @checklist.errors, status: :unprocessable_entity }
@@ -65,6 +83,6 @@ class ChecklistsController < ApplicationController
 
     # Only allow a list of trusted parameters through.
     def checklist_params
-      params.require(:checklist).permit(:title)
+      params.require(:checklist).permit(:title, checklist_items_attributes: [:id, :description, :is_done])
     end
 end

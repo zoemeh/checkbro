@@ -1,0 +1,4 @@
+turbo-stream action="remove" targets="#checklist_form"
+li.flex
+  a.flex-auto href=checklist_path(@checklist) data-turbo-frame="current_checklist" = @checklist.title
+  span.flex-initial = rand(1..2) == 1 ? '+' : '-'

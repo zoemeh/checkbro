@@ -1,22 +1,11 @@
 .grid.grid-cols-4.gap-2.h-full.w-full.mt-4
   div.bg-gray-10
     h1.text-lg Checklists
-    a href="#" Create
-    ul
-      - (1..12).each do |x|
-        li.flex
-          a.flex-auto href="#" = "List #{x}"
-          span.flex-initial = rand(1..2) == 1 ? '+' : '-'
-
-  .col-span-3.bg-blue-100.p-2
+    a.text-blue-600 href=new_checklist_path data-turbo-frame="create_checklist" Create
+    turbo-frame id="create_checklist"
+    ul#list_checklist
+      - @checklists.each do |checklist|
+        == render Sidebar::ChecklistComponent.new(checklist: checklist)
+  turbo-frame#current_checklist.col-span-3.bg-blue-100.p-2
     .flex.border-4.border-gray-700.mb-4.px-2.items-center
-      h1.text-lg.flex-auto La Mañana
-      a.flex-initial.text-blue-600 href="#" Lock
-    form
-      .flex.flex-col.gap-2
-        - (1..20).each do
-          .flex-auto.flex.gap-4.items-center
-            input.flex-initial type="checkbox"
-            input.flex-auto type="text" value="ESP"
-        .flex-auto.flex.justify-center
-          a.text-blue-600.border-2.border-gray-700.px-2.py-1 href="#" Add Process
+      h1.text-lg.text-center.flex-auto Checkbro

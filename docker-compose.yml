@@ -47,6 +47,8 @@ services:
 
   web:
     <<: *default-app
+    stdin_open: true
+    tty: true
     deploy:
       resources:
         limits:

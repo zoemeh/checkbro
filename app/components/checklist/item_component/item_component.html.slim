@@ -1,0 +1,5 @@
+.flex-auto.flex.gap-4.items-center
+  input type="hidden" name="checklist[checklist_items_attributes][#{@checklist_item.id}][id]"  value=@checklist_item.id
+  input type="hidden" name="checklist[checklist_items_attributes][#{@checklist_item.id}][is_done]" value="false"
+  input.flex-initial type="checkbox" name="checklist[checklist_items_attributes][#{@checklist_item.id}][is_done]" checked=@checklist_item.done?
+  input.flex-auto type="text" name="checklist[checklist_items_attributes][#{@checklist_item.id}][description]" value=@checklist_item.description

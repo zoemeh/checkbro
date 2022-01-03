@@ -1,6 +1,8 @@
 Rails.application.routes.draw do
   resources :checklist_items
-  resources :checklists
+  resources :checklists do
+    post "add_item", to: "checklists#add_item"
+  end
   root to: "pages#home"
 
   scope controller: :pages do

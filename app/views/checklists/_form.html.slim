@@ -1,4 +1,4 @@
-= simple_form_for(@checklist) do |f|
+= simple_form_for @checklist, html: {"data-turbo-frame": "create_checklist", id: "checklist_form"} do |f|
   = f.error_notification
   = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
 

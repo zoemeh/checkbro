@@ -1,5 +1,6 @@
 h1 New checklist
 .px-2
-  == render 'form'
+  turbo-frame id="create_checklist"
+    == render 'form'
 
 = link_to 'Back', checklists_path

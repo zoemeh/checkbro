@@ -14,7 +14,10 @@ table.table-auto
         td.px-6.py-4 = checklist.title
         td.px-6.py-4 = link_to 'Show', checklist
         td.px-6.py-4 = link_to 'Edit', edit_checklist_path(checklist)
-        td.px-6.py-4 = button_to 'Destroy', checklist, data: { confirm: 'Are you sure?' }, method: :delete
+        td.px-6.py-4
+          a (href=checklist_path(checklist) data-turbo-method="delete"
+            data-turbo-confirm="Destroy #{checklist.title}?")
+            | Destroy
 
 br
 
