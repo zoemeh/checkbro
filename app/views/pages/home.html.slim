@@ -1,5 +1,22 @@
-.flex.justify-center.pt-24.pb-12.px-2 class="sm:px-0"
-  = image_tag "ruby-on-rails.png", size: "480x188", alt: "Rails logo"
-p.text-center.text-lg  🐳 Learn the Docker fundamentals at:
-strong.block.text-center.text-lg
-  a.border-b.border-gray-900.mb-1 href="https://diveintodocker.com?ref=docker-rails-example" https://diveintodocker.com
+.grid.grid-cols-4.gap-2.h-full.w-full.mt-4
+  div.bg-gray-10
+    h1.text-lg Checklists
+    a href="#" Create
+    ul
+      - (1..12).each do |x|
+        li.flex
+          a.flex-auto href="#" = "List #{x}"
+          span.flex-initial = rand(1..2) == 1 ? '+' : '-'
+
+  .col-span-3.bg-blue-100.p-2
+    .flex.border-4.border-gray-700.mb-4.px-2.items-center
+      h1.text-lg.flex-auto La Mañana
+      a.flex-initial.text-blue-600 href="#" Lock
+    form
+      .flex.flex-col.gap-2
+        - (1..20).each do
+          .flex-auto.flex.gap-4.items-center
+            input.flex-initial type="checkbox"
+            input.flex-auto type="text" value="ESP"
+        .flex-auto.flex.justify-center
+          a.text-blue-600.border-2.border-gray-700.px-2.py-1 href="#" Add Process
