@@ -1,0 +1,17 @@
+p#notice = notice
+
+p
+  strong Checklist:
+  = @checklist_item.checklist
+
+p
+  strong Description:
+  = @checklist_item.description
+
+p
+  strong Is done:
+  = @checklist_item.is_done
+
+=> link_to 'Edit', edit_checklist_item_path(@checklist_item)
+'|
+=< link_to 'Back', checklist_items_path
