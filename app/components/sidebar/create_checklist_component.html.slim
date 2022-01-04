@@ -1,8 +1,7 @@
 turbo-frame id="create_checklist"
-  = simple_form_for @checklist, url: sidebar_checklist_new_path, html: {"data-turbo-frame": "create_checklist_sidebar", id: "checklist_sidebar_form"} do |f|
+  = simple_form_for @checklist, url: sidebar_checklist_new_path, html: {"data-turbo-frame": "create_checklist_sidebar", id: "checklist_sidebar_form", class: "flex flex-col gap-2"} do |f|
     = f.error_notification
     = f.error_notification message: f.object.errors[:base].to_sentence if f.object.errors[:base].present?
-
     .flex.flex-col.gap-2
       = f.label :title, class: "flex-initial"
       = f.input :title, label: false, class: "flex-auto",

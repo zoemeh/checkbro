@@ -8,6 +8,9 @@ class ChecklistsController < ApplicationController
 
   # GET /checklists/1 or /checklists/1.json
   def show
+    respond_to do |format|
+      format.html
+    end
   end
 
   # GET /checklists/new
@@ -69,7 +72,7 @@ class ChecklistsController < ApplicationController
           render turbo_stream: streams
         }
       else
-
+        format.turbo_stream
       end
     end
   end
@@ -79,9 +82,7 @@ class ChecklistsController < ApplicationController
     respond_to do |format|
       if @checklist.update(checklist_params)
         format.html { redirect_to checklist_url(@checklist), notice: "Checklist was successfully updated." }
-        format.turbo_stream do
-          render turbo_stream: []
-        end
+        format.turbo_stream
         format.json { render :show, status: :ok, location: @checklist }
       else
         format.html { render :edit, status: :unprocessable_entity }
@@ -93,9 +94,15 @@ class ChecklistsController < ApplicationController
   # DELETE /checklists/1 or /checklists/1.json
   def destroy
     @checklist.destroy
-
     respond_to do |format|
       format.html { redirect_to checklists_url, notice: "Checklist was successfully destroyed." }
+      format.turbo_stream do
+        streams = [
+          turbo_stream.replace(:sidebar_checklists,
+                               Sidebar::SidebarComponent.new(checklists: Checklist.order(:id)).render_in(view_context))
+        ]
+        render turbo_stream: streams
+      end
       format.json { head :no_content }
     end
   end

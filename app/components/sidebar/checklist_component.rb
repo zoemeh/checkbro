@@ -2,7 +2,8 @@
 
 class Sidebar::ChecklistComponent < ViewComponent::Base
   attr_reader :checklist
-  def initialize(checklist:)
+  def initialize(active: false, checklist:)
     @checklist = checklist
+    @active = active
   end
 end

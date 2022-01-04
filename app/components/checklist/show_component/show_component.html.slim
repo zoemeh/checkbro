@@ -8,3 +8,6 @@ turbo-frame#current_checklist.bg-blue-100.p-2
       .flex-auto.flex.justify-center.gap-4
         a.text-blue-600.border-2.border-gray-700.px-2.py-1 href=checklist_add_item_path(@checklist) data-turbo-method="post" Add Process
         button.text-blue-600.border-2.border-gray-700.px-2.py-1 type="submit" Save
+  turbo-stream action="replace" target=:sidebar_checklists
+    template
+      = render Sidebar::SidebarComponent.new(checklists: Checklist.order(:id), active: @checklist)

@@ -1,4 +1,7 @@
-turbo-frame id="sidebar_#{dom_id(@checklist)}"
-  li.flex id="sidebar_#{dom_id(@checklist)}"
-    a.flex-auto href=checklist_path(@checklist) data-turbo-frame="current_checklist"= @checklist.title
-    span.flex-initial = rand(1..2) == 1 ? '+' : '-'
+turbo-frame.block id="sidebar_checklist_#{@checklist.id}"
+  li.flex
+    a.flex-auto class=(@active ? "font-bold text-cyan-500" : "") href=checklist_path(@checklist) data-turbo-frame="current_checklist"= @checklist.title
+    .flex.flex-row.gap-2.justify-self-end.w-10
+      a.flex-auto.justify-self-start (href=checklist_path(@checklist) data-turbo-method="delete"
+        data-turbo-confirm="Destroy #{checklist.title}?") 🗑️
+      span.flex-auto.justify-self-end = rand(1..2) == 1 ? '+' : '-'
