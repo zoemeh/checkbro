@@ -77,6 +77,18 @@ class ChecklistsController < ApplicationController
     end
   end
 
+  # PATCH /checklist/:checklist_id/reset
+  def reset_checklist
+    @checklist = Checklist.find(params[:checklist_id])
+    @checklist.reset
+    respond_to do |format|
+      format.html { redirect_to checklist_url(@checklist), notice: "Checklist was successfully updated." }
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.replace(:current_checklist, Checklist::ShowComponent.new(checklist: @checklist).render_in(view_context))
+      }
+    end
+  end
+
   # PATCH/PUT /checklists/1 or /checklists/1.json
   def update
     respond_to do |format|

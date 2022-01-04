@@ -54,6 +54,9 @@ class ChecklistItemsController < ApplicationController
     respond_to do |format|
       format.html { redirect_to checklist_items_url, notice: "Checklist item was successfully destroyed." }
       format.json { head :no_content }
+      format.turbo_stream {
+        render turbo_stream: turbo_stream.remove("checklist_item_#{@checklist_item.id}")
+      }
     end
   end
 

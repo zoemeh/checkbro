@@ -10,4 +10,11 @@ class Checklist < ApplicationRecord
   def items=(v)
     checklist_items = v
   end
+
+  def reset
+    self.items.each do |x|
+      x.is_done = false
+      x.save
+    end
+  end
 end
