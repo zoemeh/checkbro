@@ -1,9 +1,9 @@
-turbo-frame#current_checklist.bg-blue-100.p-2
+turbo-frame#current_checklist.col-span-3.bg-zinc-100.p-4.border-2.border-gray-700
   == render Checklist::TitleComponent.new checklist: @checklist
   form method="put" action=checklist_path(@checklist)
     .flex.flex-col.gap-2
       #checklist_items.flex.flex-col.gap-2
-        - @checklist.items.each do |item|
+        - @checklist.items.order(:id).each do |item|
           == render Checklist::ItemComponent.new(checklist_item: item)
       .flex-auto.flex.justify-center.gap-4
         a.text-blue-600.border-2.border-gray-700.px-2.py-1 href=checklist_add_item_path(@checklist) data-turbo-method="post" Add Process
